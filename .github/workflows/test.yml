@@ -13,48 +13,48 @@ jobs:
       contents: read
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        show-progress: "false"
-        submodules: recursive
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          show-progress: "false"
+          submodules: recursive
 
-    - name: Set up Go
-      uses: actions/setup-go@v5
-      with:
-        go-version-file: go.mod
-      env:
-        # https://github.com/actions/setup-go/issues/424
-        TAR_OPTIONS: --skip-old-files
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+        env:
+          # https://github.com/actions/setup-go/issues/424
+          TAR_OPTIONS: --skip-old-files
 
-    - name: Check go fmt
-      run: |
-        gofmt -l -s -w .
-        git diff --exit-code
+      - name: Check go fmt
+        run: |
+          gofmt -l -s -w .
+          git diff --exit-code
 
-    - name: Build
-      run: go build -v ./...
+      - name: Build
+        run: go build -v ./...
 
-    - name: Set up pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        run_install: false
-        package_json_file: lemmy-js-client/package.json
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+          package_json_file: lemmy-js-client/package.json
 
-    - name: Set up Node
-      uses: actions/setup-node@v4
-      with:
-        cache: pnpm
-        cache-dependency-path: lemmy-js-client/pnpm-lock.yaml
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+          cache-dependency-path: lemmy-js-client/pnpm-lock.yaml
 
-    - name: Generate docs.json
-      working-directory: lemmy-js-client
-      run: |
-        pnpm install
-        pnpm run docs --json ../docs.json
+      - name: Generate docs.json
+        working-directory: lemmy-js-client
+        run: |
+          pnpm install
+          pnpm run docs --json ../docs.json
 
-    - name: Generate Lemmy API code
-      run: go run cmd/gen/main.go -json-file docs.json -out-dir .
+      - name: Generate Lemmy API code
+        run: go run cmd/gen/main.go -json-file docs.json -out-dir .
 
-    - name: Check that generated files are not changed
-      run: git diff --exit-code
+      - name: Check that generated files are not changed
+        run: git diff --exit-code
