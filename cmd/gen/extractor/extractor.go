@@ -3,11 +3,11 @@ package extractor
 import (
 	"fmt"
 	"os"
+	"slices"
 	"sort"
 	"strings"
 
 	"github.com/tidwall/gjson"
-	"golang.org/x/exp/slices"
 )
 
 type Route struct {
