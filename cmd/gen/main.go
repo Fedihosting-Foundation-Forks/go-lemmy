@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/rystaf/go-lemmy/cmd/gen/extractor"
-	"github.com/rystaf/go-lemmy/cmd/gen/generator"
+	"go.elara.ws/go-lemmy/cmd/gen/extractor"
+	"go.elara.ws/go-lemmy/cmd/gen/generator"
 	"go.elara.ws/logger"
 	"go.elara.ws/logger/log"
 )

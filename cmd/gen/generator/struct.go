@@ -6,7 +6,7 @@ import (
 	"unicode"
 
 	"github.com/dave/jennifer/jen"
-	"github.com/rystaf/go-lemmy/cmd/gen/extractor"
+	"go.elara.ws/go-lemmy/cmd/gen/extractor"
 )
 
 type StructGenerator struct {
