@@ -3,9 +3,11 @@ package extractor
 import (
 	"fmt"
 	"os"
+	"sort"
 	"strings"
 
 	"github.com/tidwall/gjson"
+	"golang.org/x/exp/slices"
 )
 
 type Route struct {
@@ -226,8 +228,12 @@ func getStructSlice(m map[int64]Struct) []Struct {
 	out := make([]Struct, len(m))
 	i := 0
 	for _, s := range m {
+		slices.Sort(s.UnionNames)
 		out[i] = s
 		i++
 	}
+	sort.Slice(out, func(i, j int) bool {
+		return out[i].Name < out[j].Name
+	})
 	return out
 }
