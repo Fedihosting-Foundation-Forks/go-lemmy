@@ -78,9 +78,10 @@ func (e *Extractor) Extract() ([]Route, []Struct) {
 		// Get the ID and name of the type this function returns
 		returnID := signature.Get("type.typeArguments.0.target").Int()
 		returnName := signature.Get("type.typeArguments.0.name").String()
+		returnType := signature.Get("type.typeArguments.0.type").String()
 
 		anyType := false
-		if returnName == "any" {
+		if returnName == "any" || returnType == "intrinsic" {
 			anyType = true
 		}
 

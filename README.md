@@ -21,8 +21,8 @@ For generating from another version, simply check out another version in the sub
 Inside it, build the JSON docs file:
 
 ```bash
-yarn install
-yarn run docs --json ../docs.json
+pnpm install
+pnpm run docs --json ../docs.json
 ```
 
 Back in the root folder, remove all the existing generated code:

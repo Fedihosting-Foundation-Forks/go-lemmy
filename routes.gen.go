@@ -354,6 +354,20 @@ func (c *Client) DistinguishComment(ctx context.Context, data DistinguishComment
 	return resData, nil
 }
 
+// Mark donation dialog as shown, so it isn't displayed anymore.
+func (c *Client) Donation_dialog_shown(ctx context.Context) (*SuccessResponse, error) {
+	resData := &SuccessResponse{}
+	res, err := c.req(ctx, "POST", "/user/donation_dialog_shown", nil, resData)
+	if err != nil {
+		return nil, err
+	}
+	err = resError(res, resData.Error)
+	if err != nil {
+		return nil, err
+	}
+	return resData, nil
+}
+
 // Edit a comment.
 func (c *Client) EditComment(ctx context.Context, data EditComment) (*CommentResponse, error) {
 	resData := &CommentResponse{}
@@ -651,6 +665,20 @@ func (c *Client) PrivateMessages(ctx context.Context, data GetPrivateMessages) (
 	return resData, nil
 }
 
+// Get the application a user submitted when they first registered their account
+func (c *Client) RegistrationApplication(ctx context.Context, data GetRegistrationApplication) (*RegistrationApplicationResponse, error) {
+	resData := &RegistrationApplicationResponse{}
+	res, err := c.getReq(ctx, "GET", "/admin/registration_application", data, resData)
+	if err != nil {
+		return nil, err
+	}
+	err = resError(res, resData.Error)
+	if err != nil {
+		return nil, err
+	}
+	return resData, nil
+}
+
 // Get comment replies.
 func (c *Client) Replies(ctx context.Context, data GetReplies) (*GetRepliesResponse, error) {
 	resData := &GetRepliesResponse{}
@@ -749,6 +777,20 @@ func (c *Client) HideCommunity(ctx context.Context, data HideCommunity) (*Succes
 	return resData, nil
 }
 
+// Hide a post from list views.
+func (c *Client) HidePost(ctx context.Context, data HidePost) (*SuccessResponse, error) {
+	resData := &SuccessResponse{}
+	res, err := c.req(ctx, "POST", "/post/hide", data, resData)
+	if err != nil {
+		return nil, err
+	}
+	err = resError(res, resData.Error)
+	if err != nil {
+		return nil, err
+	}
+	return resData, nil
+}
+
 // Import a backup of your user settings.
 func (c *Client) ImportSettings(ctx context.Context) (*SuccessResponse, error) {
 	resData := &SuccessResponse{}
@@ -805,6 +847,34 @@ func (c *Client) LikePost(ctx context.Context, data CreatePostLike) (*PostRespon
 	return resData, nil
 }
 
+// List all the media known to your instance.
+func (c *Client) AllMedia(ctx context.Context, data ListMedia) (*ListMediaResponse, error) {
+	resData := &ListMediaResponse{}
+	res, err := c.getReq(ctx, "GET", "/admin/list_all_media", data, resData)
+	if err != nil {
+		return nil, err
+	}
+	err = resError(res, resData.Error)
+	if err != nil {
+		return nil, err
+	}
+	return resData, nil
+}
+
+// List a comment's likes. Admin-only.
+func (c *Client) CommentLikes(ctx context.Context, data ListCommentLikes) (*ListCommentLikesResponse, error) {
+	resData := &ListCommentLikesResponse{}
+	res, err := c.getReq(ctx, "GET", "/comment/like/list", data, resData)
+	if err != nil {
+		return nil, err
+	}
+	err = resError(res, resData.Error)
+	if err != nil {
+		return nil, err
+	}
+	return resData, nil
+}
+
 // List comment reports.
 func (c *Client) CommentReports(ctx context.Context, data ListCommentReports) (*ListCommentReportsResponse, error) {
 	resData := &ListCommentReportsResponse{}
@@ -845,6 +915,34 @@ func (c *Client) Logins(ctx context.Context) error {
 		return err
 	}
 	return nil
+}
+
+// List all the media for your user
+func (c *Client) Media(ctx context.Context, data ListMedia) (*ListMediaResponse, error) {
+	resData := &ListMediaResponse{}
+	res, err := c.getReq(ctx, "GET", "/account/list_media", data, resData)
+	if err != nil {
+		return nil, err
+	}
+	err = resError(res, resData.Error)
+	if err != nil {
+		return nil, err
+	}
+	return resData, nil
+}
+
+// List a post's likes. Admin-only.
+func (c *Client) PostLikes(ctx context.Context, data ListPostLikes) (*ListPostLikesResponse, error) {
+	resData := &ListPostLikesResponse{}
+	res, err := c.getReq(ctx, "GET", "/post/like/list", data, resData)
+	if err != nil {
+		return nil, err
+	}
+	err = resError(res, resData.Error)
+	if err != nil {
+		return nil, err
+	}
+	return resData, nil
 }
 
 // List post reports.
@@ -907,6 +1005,20 @@ func (c *Client) LockPost(ctx context.Context, data LockPost) (*PostResponse, er
 func (c *Client) Login(ctx context.Context, data Login) (*LoginResponse, error) {
 	resData := &LoginResponse{}
 	res, err := c.req(ctx, "POST", "/user/login", data, resData)
+	if err != nil {
+		return nil, err
+	}
+	err = resError(res, resData.Error)
+	if err != nil {
+		return nil, err
+	}
+	return resData, nil
+}
+
+// Invalidate the currently used auth token.
+func (c *Client) Logout(ctx context.Context) (*SuccessResponse, error) {
+	resData := &SuccessResponse{}
+	res, err := c.req(ctx, "POST", "/user/logout", nil, resData)
 	if err != nil {
 		return nil, err
 	}

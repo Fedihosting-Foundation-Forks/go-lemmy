@@ -23,6 +23,9 @@ jobs:
       uses: actions/setup-go@v5
       with:
         go-version-file: go.mod
+      env:
+        # https://github.com/actions/setup-go/issues/424
+        TAR_OPTIONS: --skip-old-files
 
     - name: Check go fmt
       run: |
@@ -32,17 +35,23 @@ jobs:
     - name: Build
       run: go build -v ./...
 
+    - name: Set up pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        run_install: false
+        package_json_file: lemmy-js-client/package.json
+
     - name: Set up Node
       uses: actions/setup-node@v4
       with:
-        cache: yarn
-        cache-dependency-path: lemmy-js-client/yarn.lock
+        cache: pnpm
+        cache-dependency-path: lemmy-js-client/pnpm-lock.yaml
 
     - name: Generate docs.json
       working-directory: lemmy-js-client
       run: |
-        yarn install
-        yarn run docs --json ../docs.json
+        pnpm install
+        pnpm run docs --json ../docs.json
 
     - name: Generate Lemmy API code
       run: go run cmd/gen/main.go -json-file docs.json -out-dir .
