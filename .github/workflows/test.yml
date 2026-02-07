@@ -42,7 +42,7 @@ jobs:
           package_json_file: lemmy-js-client/package.json
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           cache: pnpm
           cache-dependency-path: lemmy-js-client/pnpm-lock.yaml
