@@ -134,9 +134,6 @@ func (c *Client) getReq(ctx context.Context, method string, path string, data, r
 
 	if c.Token != "" {
 		req.Header.Add("Authorization", "Bearer "+c.Token)
-		q := req.URL.Query()
-		q.Add("auth", c.Token)
-		req.URL.RawQuery = q.Encode()
 	}
 
 	res, err := c.client.Do(req)
