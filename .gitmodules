@@ -1,3 +1,4 @@
 [submodule "lemmy-js-client"]
 	path = lemmy-js-client
 	url = https://github.com/LemmyNet/lemmy-js-client
+	branch = release/v0.19
