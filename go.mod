@@ -4,13 +4,12 @@ go 1.23.8
 
 require (
 	github.com/dave/jennifer v1.7.1
-	github.com/google/go-querystring v1.1.0
+	github.com/google/go-querystring v1.2.0
 	github.com/tidwall/gjson v1.18.0
 	go.elara.ws/logger v0.0.0-20240720233222-35a314443645
 )
 
 require (
-	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/gookit/color v1.5.4 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
