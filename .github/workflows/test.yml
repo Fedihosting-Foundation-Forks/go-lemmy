@@ -36,7 +36,7 @@ jobs:
         run: go build -v ./...
 
       - name: Set up pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           run_install: false
           package_json_file: lemmy-js-client/package.json
