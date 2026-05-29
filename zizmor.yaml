@@ -1,0 +1,5 @@
+rules:
+  dependabot-cooldown:
+    # Lemmy-UI submodule cooldown is not needed but we can only disable this
+    # check for the whole repo
+    disable: true
