@@ -1,6 +1,7 @@
 module github.com/Fedihosting-Foundation-Forks/go-lemmy
 
-go 1.23.8
+go 1.25.0
+toolchain go1.25.10
 
 require (
 	github.com/dave/jennifer v1.7.1
