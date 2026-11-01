@@ -7,7 +7,7 @@ toolchain go1.25.10
 require (
 	github.com/dave/jennifer v1.7.1
 	github.com/google/go-querystring v1.2.0
-	github.com/tidwall/gjson v1.19.0
+	github.com/tidwall/gjson v1.20.0
 	go.elara.ws/logger v0.0.0-20240720233222-35a314443645
 )
 
